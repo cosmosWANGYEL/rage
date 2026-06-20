@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Do You Love Me? ❤️</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: Arial, sans-serif;
+}
+
+body{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(135deg,#ff9a9e,#fad0c4);
+    overflow:hidden;
+}
+
+.container{
+    background:white;
+    padding:40px 30px;
+    border-radius:30px;
+    text-align:center;
+    width:90%;
+    max-width:500px;
+    box-shadow:0 15px 40px rgba(0,0,0,0.2);
+    animation:fadeIn 1s;
+}
+
+h1{
+    color:#ff4f81;
+    margin-bottom:25px;
+    font-size:2rem;
+}
+
+#messageBox{
+    min-height:70px;
+    margin-bottom:20px;
+    color:#444;
+    font-size:1.1rem;
+    transition:0.3s;
+}
+
+.buttons{
+    display:flex;
+    justify-content:center;
+    gap:20px;
+    flex-wrap:wrap;
+}
+
+button{
+    border:none;
+    padding:15px 30px;
+    border-radius:50px;
+    font-size:1.2rem;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+#yesBtn{
+    background:#4CAF50;
+    color:white;
+}
+
+#yesBtn:hover{
+    transform:scale(1.05);
+}
+
+#noBtn{
+    background:#ff4f81;
+    color:white;
+}
+
+.shake{
+    animation:shake 0.4s;
+}
+
+.progress{
+    width:100%;
+    height:12px;
+    background:#eee;
+    border-radius:20px;
+    margin-top:20px;
+    overflow:hidden;
+}
+
+.progress-bar{
+    height:100%;
+    width:0%;
+    background:#ff4f81;
+    transition:0.5s;
+}
+
+.final{
+    animation:fadeIn 1s;
+}
+
+.credit{
+    margin-top:25px;
+    color:#888;
+    font-size:14px;
+}
+
+@keyframes shake{
+    0%{transform:translateX(0);}
+    25%{transform:translateX(-8px);}
+    50%{transform:translateX(8px);}
+    75%{transform:translateX(-8px);}
+    100%{transform:translateX(0);}
+}
+
+@keyframes fadeIn{
+    from{
+        opacity:0;
+        transform:translateY(20px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+@media(max-width:500px){
+    h1{
+        font-size:1.7rem;
+    }
+
+    button{
+        width:100%;
+    }
+
+    .buttons{
+        flex-direction:column;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container" id="container">
+
+    <h1>🥰 Do you love me? ❤️</h1>
+
+    <div id="messageBox">
+        Choose carefully... 👀
+    </div>
+
+    <div class="buttons">
+        <button id="yesBtn">😊 Yes</button>
+        <button id="noBtn">😢 No</button>
+    </div>
+
+    <div class="progress">
+        <div class="progress-bar" id="bar"></div>
+    </div>
+
+</div>
+
+<script>
+
+let clickCount = 0;
+
+const yesBtn = document.getElementById("yesBtn");
+const noBtn = document.getElementById("noBtn");
+const message = document.getElementById("messageBox");
+const bar = document.getElementById("bar");
+const container = document.getElementById("container");
+
+yesBtn.addEventListener("click", () => {
+
+    clickCount++;
+
+    container.classList.add("shake");
+
+    setTimeout(()=>{
+        container.classList.remove("shake");
+    },400);
+
+    noBtn.style.transform = `scale(${1 + clickCount * 0.5})`;
+
+    if(clickCount === 1){
+        message.innerHTML =
+        "🕵️ Lie detector activated...<br>🤨 Suspicious answer detected.";
+        bar.style.width = "33%";
+    }
+
+    else if(clickCount === 2){
+        message.innerHTML =
+        "🤖 AI Verification...<br>🧢 AI thinks you're capping.";
+        bar.style.width = "66%";
+    }
+
+    else if(clickCount === 3){
+        message.innerHTML =
+        "📶 Connecting to love...<br>❌ Connection lost.";
+        bar.style.width = "100%";
+
+        yesBtn.style.display = "none";
+
+        noBtn.innerHTML = "💔 Just Press Me";
+        noBtn.style.transform = "scale(2)";
+    }
+});
+
+noBtn.addEventListener("click", () => {
+
+    container.innerHTML = `
+        <div class="final">
+            <h1>😢💔</h1>
+
+            <h2 style="color:#ff4f81;">
+                I know you don't love me
+            </h2>
+
+            <br>
+
+            <p style="font-size:22px;">
+                Mission failed successfully. 🫡
+            </p>
+
+            <br>
+
+            <p>
+                Even the Yes button gave up. 😔
+            </p>
+
+            <br>
+
+            <h3 style="color:#666;">
+                — Pema Wangyel, incW
+            </h3>
+        </div>
+    `;
+});
+
+</script>
+
+</body>
+</html>
+
